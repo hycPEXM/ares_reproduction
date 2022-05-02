@@ -1,16 +1,47 @@
-[toc]
+> 此项目是`hyc undergraduate thesis`实验记录
 
 
 
-`hyc undergraduate thesis`实验记录
+## 目录
+
+
+- [conda虚拟环境`new`的搭建](#conda虚拟环境`new`的搭建)
+- [代码](#代码)
+  * [ares_release源码](#ares_release源码)
+  * [atom3d库源码](#atom3d库源码)
+  * [sc.py](#sc.py)
+  * [benchmark1_data.py](#benchmark1_data.py)
+  * [new_benchmark1.ipynb](#new_benchmark1.ipynb)
+  * [benchmark2_data.py](#benchmark2_data.py)
+  * [make_final_csvs.py](#make_final_csvs.py)
+  * [new_benchmark2.ipynb](#new_benchmark2.ipynb)
+  * [translation_data.py](#translation_data.py)
+  * [new_translation.ipynb](#new_translation.ipynb)
+  * [rnaome_model.py & rnaome_predict.py](#rnaome_model.py & rnaome_predict.py)
+  * [new_rnaome.ipynb](#new_rnaome.ipynb)
+- [lsf scripts](#lsf-scripts)
+  * [`new_train.lsf`](#`new_train.lsf`)
+  * [`new_aug.lsf`](#`new_aug.lsf`)
+  * [`new_aug_natives.lsf`](#`new_aug_natives.lsf`)
+  * [`new_watkins.lsf`](#`new_watkins.lsf`)
+  * [`new_blind.lsf`](#`new_blind.lsf`)
+  * [`new_translation.lsf`](#`new_translation.lsf`)
+  * [`new_rnaome.lsf`](#`new_rnaome.lsf`)
+  * [`benchmark1_data.lsf`](#`benchmark1_data.lsf`)
+  * [`benchmark2_data.lsf`](#`benchmark2_data.lsf`)
+  * [`rnaome_fe.lsf`](#`rnaome_fe.lsf`)
+- [其他](#其他)
 
 
 
 ## conda虚拟环境`new`的搭建
 
-经过多次失败的尝试，我最终搭建的conda虚拟环境命名为`new`，最终能跑通作者提供的代码（在计算队列：72rtxib和62v100ib上都能成功运行ares代码）。
+经过多次失败的尝试，我最终搭建的conda虚拟环境命名为`new`，最终能跑通作者提供的代码。
+
+本次实验所有操作均在南大hpc服务器上完成，经实验，在计算队列：72rtxib和62v100ib上都能成功运行ares代码。
 
 ```bash
+# 需要安装anaconda3
 conda create -n new python=3.8 pip 
 conda activate new
 
@@ -70,6 +101,13 @@ export PATH=/fsa/home/ww_duyy/hyc/anaconda3/envs/new/bin:$PATH
 python -c "import torch; import e3nn.cuda_rsh"
 ```
 
+最后一步：Set environment variables!
+
+```bash
+cd /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/
+cp .env.template .env
+```
+
 
 
 ## 代码
@@ -81,7 +119,7 @@ python -c "import torch; import e3nn.cuda_rsh"
 `train.py`在`import ares.data as d`一行前加上以下代码
 
 ```bash
-os.environ["WANDB_API_KEY"] = "22bd032b485c5d9f00edefa3d1bf114e17b0b47f"  #此处换为你的wandb api key
+os.environ["WANDB_API_KEY"] = "22bd..."  #此处换为你的wandb api key
 os.environ["WANDB_MODE"] = "offline"
 
 parentPath = os.path.abspath(os.path.dirname(os.getcwd()))
@@ -105,7 +143,7 @@ sys.path.append(parentPath)
 
 ### sc.py
 
-因为作者给的测试结果.csv文件就包含了`rms`，所以不需要此脚本也可以，直接把作者的.csv文件里的ares分数换成自己复现的 :joy::joy_cat::clown_face:，但是训练时必需这一步，否则缺少标签。
+因为作者给的测试结果.csv文件就包含了`rms`，所以不需要此脚本也可以，直接把作者的.csv文件里的ares分数换成自己复现的 :joy::joy_cat::clown_face:，但是训练时必需这一步，否则没有标签。
 
 
 
@@ -152,7 +190,7 @@ produce `new_benchmark2_nobootstrap.csv` and `new_benchmark2_bootstrap.csv`
 
 
 
-### new_translation.py
+### new_translation.ipynb
 
 画图：
 
@@ -181,6 +219,8 @@ produce `new_benchmark2_nobootstrap.csv` and `new_benchmark2_bootstrap.csv`
 
 ### `new_train.lsf`
 
+训练模型，以'grid'方式对超参数组合进行扫描。
+
 ```bash
 #BSUB -q 62v100ib
 #BSUB -n 8
@@ -206,6 +246,8 @@ done
 
 
 ### `new_aug.lsf`
+
+测试benchmark1
 
 ```bash
 #BSUB -q 62v100ib
@@ -238,6 +280,8 @@ done
 
 ### `new_aug_natives.lsf`
 
+对benchmark1的native结构单独进行测试
+
 ```bash
 #BSUB -q 62v100ib
 #BSUB -n 6
@@ -254,6 +298,8 @@ cd /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/
 
 
 ### `new_watkins.lsf`
+
+测试benchmark2
 
 ```bash
 #BSUB -q 62v100ib
@@ -283,6 +329,8 @@ done
 
 
 ### `new_blind.lsf`
+
+测试blind prediction
 
 ```bash
 #BSUB -q 62v100ib
@@ -314,6 +362,8 @@ done
 
 ### `new_translation.lsf`
 
+测试`ARES learns helix width for optimal base pairing`实验中的RNA分子
+
 ```bash
 #BSUB -q 62v100ib
 #BSUB -n 6
@@ -333,6 +383,8 @@ cd /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/
 
 
 ### `new_rnaome.lsf`
+
+测试`ARES learns to identify key RNA characteristics`实验中的RNA分子
 
 ```bash
 #BSUB -q 62v100ib
@@ -356,6 +408,8 @@ cd /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/
 
 ### `benchmark1_data.lsf`
 
+生成画图需要的.csv文件，里面ares字段是我复现的结果
+
 ```bash
 #BSUB -q 5218
 #BSUB -n 16
@@ -372,6 +426,8 @@ python benchmark1_data.py
 
 ### `benchmark2_data.lsf`
 
+生成画图需要的.csv文件，里面ares字段是我复现的结果
+
 ```bash
 #BSUB -q 5218
 #BSUB -n 16
@@ -387,6 +443,8 @@ python benchmark2_data.py
 
 
 ### `rnaome_fe.lsf`
+
+修改代码后，重新测试`ARES learns to identify key RNA characteristics`实验中的RNA分子
 
 ```bash
 #BSUB -q 62v100ib
@@ -405,3 +463,14 @@ cd /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/
 
 
 
+## 其他
+
+- 其他更详细的说明参见论文原作者所公开的资源：
+  - [Structural data used to test a new geometric deep learning RNA scoring function emulating fully de novo modeling conditions | Stanford Digital Repository](https://purl.stanford.edu/sq987cc0358)
+  - [Structural data used to train, test, and characterize a new geometric deep learning RNA scoring function | Stanford Digital Repository](https://purl.stanford.edu/bn398fc4306)
+  - [Auxiliary code related to the publication "Geometric Deep Learning of RNA Structure" | Zenodo](https://zenodo.org/record/5090157#.YnAY3odBxPY)
+  - [Training code for ARES neural network | Zenodo](https://zenodo.org/record/5088971#.YnAY7YdBxPZ)
+  - [ARES-specific adaptation of E3NN | Zenodo](https://zenodo.org/record/5090151#.YnAY9YdBxPZ)
+- pred_example目录下是用ares代码训练得到的模型对作者所给示例RNA分子的.pdb文件进行测试后得到的输出结果.csv文件和pytorch lightning用于记录日志的一些文件，该目录没有什么意义，仅作为记录。
+
+- 所有用wandb云服务记录的训练模型均可在[ares Workspace(hyc) – Weights & Biases (wandb.ai)](https://wandb.ai/enhhyc/ares)找到，它记录了模型的配置（如超参数的设置），训练过程中CPU、内存、GPU等硬件资源的运用情况（可视化），训练log文件，训练集损失函数loss和验证集损失函数val_loss在训练过程中的变化（可视化），python环境要求requirements.txt。其中性能最好（在训练集和验证集上的损失函数值均为所有模型中最小的）、用于测试的模型为[best_ares_model_for_inferenceV2 | ares – Weights & Biases (wandb.ai)](https://wandb.ai/enhhyc/ares/runs/2zojmx7u)。
