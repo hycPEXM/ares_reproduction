@@ -8,12 +8,12 @@
 
 - [conda虚拟环境`new`的搭建](#conda虚拟环境-new-的搭建)
 - [代码](#代码)
-  * [ares_release源码](#ares-release源码)
-  * [atom3d库源码](#atom3d---)
+  * [ares_release源码](#ares_release源码)
+  * [atom3d库源码](#atom3d库源码)
   * [sc.py](#scpy)
   * [benchmark1_data.py](#benchmark1_data.py)
   * [new_benchmark1.ipynb](#new_benchmark1ipynb)
-  * [benchmark2_data.py](#benchmark2-datapy)
+  * [benchmark2_data.py](#benchmark2_datapy)
   * [make_final_csvs.py](#make-final-csvspy)
   * [new_benchmark2.ipynb](#new-benchmark2ipynb)
   * [translation_data.py](#translation-datapy)
@@ -31,7 +31,7 @@
   * [`benchmark1_data.lsf`](#-benchmark1-datalsf-)
   * [`benchmark2_data.lsf`](#-benchmark2-datalsf-)
   * [`rnaome_fe.lsf`](#-rnaome-felsf-)
-- [其他](#--)
+- [其他](#其他)
 
 
 
