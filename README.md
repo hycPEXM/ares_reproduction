@@ -6,32 +6,32 @@
 
 此目录只是为了展示在Github页面上。
 
-- [conda虚拟环境`new`的搭建](#conda虚拟环境-new-的搭建)
-- [代码](#代码)
-  * [ares_release源码](#ares_release源码)
-  * [atom3d库源码](#atom3d库源码)
-  * [sc.py](#scpy)
-  * [benchmark1_data.py](#benchmark1_data.py)
-  * [new_benchmark1.ipynb](#new_benchmark1ipynb)
-  * [benchmark2_data.py](#benchmark2_datapy)
-  * [make_final_csvs.py](#make-final-csvspy)
-  * [new_benchmark2.ipynb](#new-benchmark2ipynb)
-  * [translation_data.py](#translation-datapy)
-  * [new_translation.ipynb](#new-translationipynb)
-  * [rnaome_model.py & rnaome_predict.py](#rnaome-modelpy---rnaome-predictpy)
-  * [new_rnaome.ipynb](#new-rnaomeipynb)
-- [lsf scripts](#lsf-scripts)
-  * [`new_train.lsf`](#-new-trainlsf-)
-  * [`new_aug.lsf`](#-new-auglsf-)
-  * [`new_aug_natives.lsf`](#-new-aug-nativeslsf-)
-  * [`new_watkins.lsf`](#-new-watkinslsf-)
-  * [`new_blind.lsf`](#-new-blindlsf-)
-  * [`new_translation.lsf`](#-new-translationlsf-)
-  * [`new_rnaome.lsf`](#-new-rnaomelsf-)
-  * [`benchmark1_data.lsf`](#-benchmark1-datalsf-)
-  * [`benchmark2_data.lsf`](#-benchmark2-datalsf-)
-  * [`rnaome_fe.lsf`](#-rnaome-felsf-)
-- [其他](#其他)
+- conda虚拟环境`new`的搭建
+- 代码
+  * ares_release源码
+  * atom3d库源码
+  * sc.py
+  * benchmark1_data.py
+  * new_benchmark1.ipynb
+  * benchmark2_data.py
+  * make_final_csvs.py
+  * new_benchmark2.ipynb
+  * translation_data.py
+  * new_translation.ipynb
+  * rnaome_model.py & rnaome_predict.py
+  * new_rnaome.ipynb
+- lsf scripts
+  * `new_train.lsf`
+  * `new_aug.lsf`
+  * `new_aug_natives.lsf`
+  * `new_watkins.lsf`
+  * `new_blind.lsf`
+  * `new_translation.lsf`
+  * `new_rnaome.lsf`
+  * `benchmark1_data.lsf`
+  * `benchmark2_data.lsf`
+  * `rnaome_fe.lsf`
+- 其他
 
 
 
