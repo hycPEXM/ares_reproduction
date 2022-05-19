@@ -31,6 +31,7 @@
   * `benchmark1_data.lsf`
   * `benchmark2_data.lsf`
   * `rnaome_fe.lsf`
+- 分布式训练
 - 其他
 
 
@@ -461,6 +462,16 @@ cd /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/
 
 /fsa/home/ww_duyy/hyc/anaconda3/envs/new/bin/python3.8 -m ares.rnaome_predict /fsa/home/ww_duyy/hyc/data/Townshend/rnaome/pdbs /fsa/home/ww_duyy/hyc/data/ares_release/ares_release/models/ares/2zojmx7u/checkpoints/epoch=4-step=4374.ckpt  /fsa/home/ww_duyy/hyc/data/Townshend/rnaome/new_rnaome.csv -f pdb --nolabels --gpus=1 --num_workers=8 --batch_size=16
 ```
+
+
+
+## 分布式训练
+
+Distributed training / Multi-GPU training
+
+尝试了pytorch-lightning支持的各种分布式模式：dp, ddp, ddp_spawn, ddp2和horovod，都因遇到各种不常见问题而失败
+
+这点可能跟代码有关，可能与软件环境有关，可能与服务器IBM LSF系统的配置有关（horovod可能就属于此类），我没有解决这一问题。
 
 
 
